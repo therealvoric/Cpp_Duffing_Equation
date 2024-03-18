@@ -7,7 +7,7 @@ using namespace std;
 // Duffing-Gleichung: y'' + δ*y' + α*y + β*y^3 = γ*cos(ω*t)
 
 // Funktion, die das Differential der Duffing-Gleichung berechnet
-void duffingEquation(double t, double y[], double dydt[]) {
+void duffingEquationtext(double t, double y[], double dydt[]) {
     double alpha = 1.0; // Konstante α
     double beta = -1.0; // Konstante β
     double delta = 0.2; // Dämpfungskonstante δ
@@ -19,7 +19,7 @@ void duffingEquation(double t, double y[], double dydt[]) {
 }
 
 // Runge-Kutta-Methode vierter Ordnung zur Integration der Differentialgleichungen
-void rungeKutta(double t0, double y0[], double t, double h) {
+void rungeKuttatext(double t0, double y0[], double t, double h) {
     double k1[2], k2[2], k3[2], k4[2];
     double yTemp[2];
     double dydt[2];
@@ -33,28 +33,28 @@ void rungeKutta(double t0, double y0[], double t, double h) {
 
     while (tNow < t) {
         // Berechne k1
-        duffingEquation(tNow, yNow, dydt);
+        duffingEquationtext(tNow, yNow, dydt);
         k1[0] = h * dydt[0];
         k1[1] = h * dydt[1];
 
         // Berechne k2
         yTemp[0] = yNow[0] + 0.5 * k1[0];
         yTemp[1] = yNow[1] + 0.5 * k1[1];
-        duffingEquation(tNow + 0.5 * h, yTemp, dydt);
+        duffingEquationtext(tNow + 0.5 * h, yTemp, dydt);
         k2[0] = h * dydt[0];
         k2[1] = h * dydt[1];
 
         // Berechne k3
         yTemp[0] = yNow[0] + 0.5 * k2[0];
         yTemp[1] = yNow[1] + 0.5 * k2[1];
-        duffingEquation(tNow + 0.5 * h, yTemp, dydt);
+        duffingEquationtext(tNow + 0.5 * h, yTemp, dydt);
         k3[0] = h * dydt[0];
         k3[1] = h * dydt[1];
 
         // Berechne k4
         yTemp[0] = yNow[0] + k3[0];
         yTemp[1] = yNow[1] + k3[1];
-        duffingEquation(tNow + h, yTemp, dydt);
+        duffingEquationtext(tNow + h, yTemp, dydt);
         k4[0] = h * dydt[0];
         k4[1] = h * dydt[1];
 
@@ -72,13 +72,13 @@ void rungeKutta(double t0, double y0[], double t, double h) {
     output.close(); // Datei schließen
 }
 
-int main() {
+int maintext() {
     double t0 = 0.0; // Anfangszeit
     double y0[2] = {0.1, 0.0}; // Anfangsbedingungen: y(0) = 0.1, y'(0) = 0
     double tFinal = 100.0; // Endzeit
     double h = 0.01; // Schrittweite
 
-    rungeKutta(t0, y0, tFinal, h); // Aufruf der Runge-Kutta-Methode
+    rungeKuttatext(t0, y0, tFinal, h); // Aufruf der Runge-Kutta-Methode
 
     cout << "Simulation abgeschlossen. Ergebnisse wurden in 'duffing_output.txt' gespeichert." << endl;
 
